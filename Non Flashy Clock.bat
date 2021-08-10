@@ -1,5 +1,8 @@
 @echo off
+::Appear on top
+powershell -ExecutionPolicy UnRestricted -Command "(Add-Type -memberDefinition \"[DllImport(\"\"user32.dll\"\")] public static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int x,int y,int cx, int xy, uint flagsw);\" -name \"Win32SetWindowPos\" -passThru )::SetWindowPos((Add-Type -memberDefinition \"[DllImport(\"\"Kernel32.dll\"\")] public static extern IntPtr GetConsoleWindow();\" -name \"Win32GetConsoleWindow\" -passThru )::GetConsoleWindow(),-1,0,0,0,0,67)" >nul
 cls
+
 :: Edit this to choose your prefered time mode.
 ::     "0" = Time Format HH:mm:ss
 ::     "1" = Time Format HH:mm:ss:SS
@@ -26,7 +29,7 @@ if /i "%timeChoice%"=="1" set timeMode=%time: =0%
 :: What you see is what you get.
 <nul set /p =%timeMode%%esc%[?25l
 title %timeMode%
-<nul set /p =%BSPACE%%BSPACE%%BSPACE%%BSPACE%%BSPACE%%BSPACE%%BSPACE%%BSPACE%%BSPACE%%BSPACE%%BSPACE%%BSPACE%%BSPACE%
+<nul set /p =%BSPACE%%BSPACE%%BSPACE%%BSPACE%%BSPACE%%BSPACE%%BSPACE%%BSPACE%
 goto :TOP
 
 :: This was made because if a program is on full screen on my main screen,
