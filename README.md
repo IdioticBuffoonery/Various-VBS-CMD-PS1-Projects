@@ -1,2 +1,2 @@
-# Usefulish-.ps1-projects
-Here are a few useful powershell projects that I have created a while back. I may update this repo with new ones though. Idk yet though
+# Various VBS, CMD/BAT and Powershell projects
+This repo is just going to be full of random stuff. Some are useful, and some aren't.
