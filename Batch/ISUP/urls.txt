@@ -1,0 +1,6 @@
+google.com
+example.com
+bing.com
+fakesubdomain.myexamplewebsite.fake
+127.0.0.1
+8.8.4.4
