@@ -78,7 +78,7 @@ function enableDevTools {
         $replace = "const ENABLE_DEVTOOLS = _buildInfo.default.releaseChannel === 'canary' ? settings.get('DANGEROUS_ENABLE_DEVTOOLS_ONLY_ENABLE_IF_YOU_KNOW_WHAT_YOURE_DOING', false) : true;";
         (Get-Content "$global:discord_desktop_coreLocation\core\app\mainScreen.js").replace($find, $replace) | Set-Content "$global:discord_desktop_coreLocation\core\app\mainScreen.js"
     }
-    Write-Host -Prompt "DevTools has been enabled!" -foreground "Green"
+    Write-Host "DevTools has been enabled!" -foreground "Green"
     Read-Host -Prompt "Press any key to exit"
 }
 
