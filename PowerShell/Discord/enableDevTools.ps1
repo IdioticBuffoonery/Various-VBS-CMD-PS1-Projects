@@ -16,50 +16,44 @@ function runHeader {
     Write-Host "This tool enables DevTools/Inspect Element on Discord's Stable Channel" -foreground "Cyan"
     Write-Host "This may break Discord's ToS." -foreground "DarkRed"
     Read-Host -Prompt "Press Enter to continue, or press Ctrl+C to exit"
-    clear-host
     preChecks
 }
 function preChecks {
     if (!(Test-Path "$global:discord_desktop_coreLocation\core.asar")) {
-        Write-Host "Discord is not installed on this machine." -foreground "DarkRed"
+        Write-Host "`r`nDiscord is not installed on this machine." -foreground "DarkRed"
         Write-Host "Please install Discord and try again." -foreground "DarkRed"
         Read-Host -Prompt "Press Enter to exit"
         exit
-    }
-    elseif (!(Test-Path "$global:7ZipLocation\7z.exe")) {
-        Write-Host "7-Zip is not installed on this machine." -foreground "DarkRed"
+    } elseif (!(Test-Path "$global:7ZipLocation\7z.exe")) {
+        Write-Host "`r`n7-Zip is not installed on this machine." -foreground "DarkRed"
         Write-Host "Please install 7-Zip and try again." -foreground "DarkRed"
         Read-Host -Prompt "Press Enter to exit"
         exit
-    }
-    elseif (!(Test-Path "$global:7ZipLocation\Formats\Asar.64.dll")) {
-        Write-Host "Asar.64.dll is not installed in the 7-Zip/Formats directory." -foreground "DarkRed"
+    } elseif (!(Test-Path "$global:7ZipLocation\Formats\Asar.64.dll")) {
+        Write-Host "`r`nAsar.64.dll is not installed in the 7-Zip/Formats directory." -foreground "DarkRed"
         Write-Host "Please install the extension via: https://www.tc4shell.com/en/7zip/asar/" -foreground "DarkRed"
         Read-Host -Prompt "Press Enter to exit"
         exit
-    }
-    elseif (Test-Path "$global:discord_desktop_coreLocation\core\") {
-        Write-Host "$global:discord_desktop_coreLocation\core\ already exists.`r`nYou may want to delete the folder before you try again!" -foreground "DarkRed"
+    } elseif (Test-Path "$global:discord_desktop_coreLocation\core\") {
+        Write-Host "`r`n$global:discord_desktop_coreLocation\core\ already exists.`r`nYou may want to delete the folder before you try again!" -foreground "DarkRed"
         Read-Host -Prompt "Press any key to exit"
         exit
     } else {
-        clear-host
-        Write-Host "We're all set to go!" -foreground "DarkGreen"
+        Write-Host "`r`nWe're all set to go!" -foreground "DarkGreen"
         Write-Host "This is your last chance to back out!" -foreground "DarkRed"
         Read-Host -Prompt "Press Enter to continue enabling DevTools, or press Ctrl+C to exit"
-        clear-host
         enableDevTools
     }
     exit
 }
 function enableDevTools {
-    Write-Host "Enabling DevTools..." -foreground "Yellow"
+    Write-Host "`r`nEnabling DevTools..." -foreground "Yellow"
     Write-Host "Killing Discord..." -foreground "Yellow"
     $discord = Get-Process discord -ErrorAction SilentlyContinue
     $discord | Stop-Process -Force
     if (Test-Path "$global:discord_desktop_coreLocation\core.asar") {
         Write-Host "Extracting $global:discord_desktop_coreLocation\core.asar..." -foreground "Yellow"
-        & $global:7ZipLocation\7z.exe x $global:discord_desktop_coreLocation\core.asar "-o$global:discord_desktop_coreLocation\core" >null
+        & $global:7ZipLocation\7z.exe x $global:discord_desktop_coreLocation\core.asar "-o$global:discord_desktop_coreLocation\core" | Out-Null
     }
     if (Test-Path "$global:discord_desktop_coreLocation\index.js") {
         Write-Host "Replacing $global:discord_desktop_coreLocation\index.js..." -foreground "Yellow"
@@ -81,5 +75,4 @@ function enableDevTools {
     Write-Host "DevTools has been enabled!" -foreground "Green"
     Read-Host -Prompt "Press any key to exit"
 }
-
 runHeader
